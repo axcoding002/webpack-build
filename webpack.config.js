@@ -67,6 +67,7 @@ module.exports = {
       /* Webpack plugin and CLI utility that represents bundle content as
       convenient interactive zoomable treemap */
       analyzerMode: 'static'
+      /*
       analyzerHost:
       analyzerPort:
       analyzerUrl:
@@ -78,7 +79,7 @@ module.exports = {
       statsFilename:
       statsOptions:
       excludeAssets:
-      logLevel:
+      logLevel: */
     }),
   ],
   output: {

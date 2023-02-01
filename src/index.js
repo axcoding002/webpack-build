@@ -5,9 +5,9 @@ import Icon from './favicon.ico';
 // import "./style.less";
 // import "./style.scss";
 import "./style.sass";
-import indexHTML from "./index.html";
+import blockHTML from "./block.html";
 
-
+alert(blockHTML);
 
 /*
 import Data from './data.xml';
