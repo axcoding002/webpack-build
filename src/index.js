@@ -5,6 +5,7 @@ import Icon from './favicon.ico';
 // import "./style.less";
 // import "./style.scss";
 import "./style.sass";
+import indexHTML from "./index.html";
 
 
 /*

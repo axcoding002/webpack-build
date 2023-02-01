@@ -130,6 +130,15 @@ module.exports = {
         ],
       },
       {
+        test: /\.styl$/,
+        loader: "stylus-loader", 
+        // compiles Styl to CSS
+      },
+      {
+        test: /\.html$/i,
+        loader: "html-loader",
+      },
+      {
         // Loading Images
         // https://webpack.js.org/guides/asset-management/#loading-images
         test: /\.(png|svg|jpg|jpeg|gif|ico)$/i,
