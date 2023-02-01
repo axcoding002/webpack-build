@@ -17,7 +17,7 @@ module.exports = {
       dependOn: 'shared',
     },
     print: {
-      import: './src/print.js',
+      import: './src/js/print.js',
       dependOn: 'shared',
     },
     shared: 'lodash',
@@ -97,12 +97,7 @@ module.exports = {
       {
         test: /\.m?js$/,
         exclude: /node_modules/,
-        use: {
-          loader: "babel-loader",
-          options: {
-            presets: ['@babel/preset-env']
-          }
-        }
+        use: ["babel-loader"],
       },
       {
         // Loading CSS
@@ -192,4 +187,7 @@ module.exports = {
       },
     ],
   },
+  resolve: {
+    extensions: ["*", ".js"],
+  }
 };

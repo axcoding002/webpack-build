@@ -1,0 +1,55 @@
+// @font-face 
+@font-face 
+  font-family: 'Saira Extracondensed Black'
+  src: url('../fonts/saira-extracondensed-black.woff') format('woff')
+  src: url('../fonts/saira-extracondensed-black.woff2') format('woff2')
+  font-weight: 600
+  font-style: normal
+
+// $ - variable
+$color: orange
+.main
+  $margin: 10px
+  color: $color // orange
+  margin: $margin * 0.5 // 5px
+  
+// nesting
+// https://sass-lang.com/documentation/style-rules#nesting
+.main // .main
+  .main--sidebar // .main .main--sidebar
+
+// selector lists
+// https://sass-lang.com/documentation/style-rules#selector-lists
+.alert, .warning // alert, warning
+  ul, p // alert ul, warning ul, alert p, warning p
+
+// selector-combinators
+// https://sass-lang.com/documentation/style-rules#selector-combinators
+ul >
+  li // ul > li
+h2
+  + p // h2 + p
+p
+  ~
+    span // p ~ span
+
+// & - parrent selector
+// https://sass-lang.com/documentation/style-rules/parent-selector
+.main // .main
+  & // .main
+  & &--sidebar // .main .main--sidebar
+  &--sidebar:hover // .main--sidebar:hover
+  body:not(&--sidebar) // all in body without main--sidebar
+
+// TODO ...
+  
+// % | @extend - placeholder selectors
+%toolbelt
+  &:hover // .action-buttons:hover, .reset-buttons:hover
+.action-buttons
+  @extend %toolbelt // style + .action-buttons:hover
+.reset-buttons
+  @extend %toolbelt // style + .reset-buttons:hover
+
+// 
+

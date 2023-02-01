@@ -1,11 +1,11 @@
 import _ from 'lodash';
-import printMe from './print.js';
-import Icon from './favicon.ico';
+import printMe from './js/print.js';
+import Icon from './image/favicon.ico';
 // import './style.css';
 // import "./style.less";
 // import "./style.scss";
-import "./style.sass";
-import blockHTML from "./block.html";
+import "./style/_style.sass";
+import blockHTML from "./html/block.html";
 
 alert(blockHTML);
 
