@@ -1,15 +1,15 @@
 import _ from 'lodash';
 import printMe from './js/print.js';
 import Icon from './image/favicon.ico';
-// import './style.css';
-// import "./style.less";
-// import "./style.scss";
-import "./style/_style.sass";
-import blockHTML from "./html/block.html";
-
-alert(blockHTML);
+// import './style/example.css';
+// import './style/example.less';
+// import './style/example.scss';
+import './style/example.sass';
 
 /*
+import blockHTML from './html/block.html';
+alert(blockHTML);
+
 import Data from './data.xml';
 alert(Data);
 import Notes from './data.csv';

@@ -1,10 +1,10 @@
 "use strict";
 (self["webpackChunkwebpack_build"] = self["webpackChunkwebpack_build"] || []).push([["print"],{
 
-/***/ "./src/print.js":
-/*!**********************!*\
-  !*** ./src/print.js ***!
-  \**********************/
+/***/ "./src/js/print.js":
+/*!*************************!*\
+  !*** ./src/js/print.js ***!
+  \*************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -23,8 +23,8 @@ function printMe() {
 },
 /******/ __webpack_require__ => { // webpackRuntimeModules
 /******/ var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-/******/ __webpack_require__.O(0, ["shared"], () => (__webpack_exec__("./src/print.js")));
+/******/ __webpack_require__.O(0, ["shared"], () => (__webpack_exec__("./src/js/print.js")));
 /******/ var __webpack_exports__ = __webpack_require__.O();
 /******/ }
 ]);
-//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicHJpbnQuYnVuZGxlLmpzIiwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7OztBQUF1QjtBQUVSLFNBQVNDLE9BQU8sR0FBRztFQUNoQ0MsS0FBSyxDQUFDLDZCQUE2QixDQUFDO0FBQ3RDIiwic291cmNlcyI6WyJ3ZWJwYWNrOi8vd2VicGFjay1idWlsZC8uL3NyYy9wcmludC5qcyJdLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgXyBmcm9tICdsb2Rhc2gnO1xuXG5leHBvcnQgZGVmYXVsdCBmdW5jdGlvbiBwcmludE1lKCkge1xuICBhbGVydCgnSSBnZXQgY2FsbGVkIGZyb20gcHJpbnQuanMhJyk7XG59Il0sIm5hbWVzIjpbIl8iLCJwcmludE1lIiwiYWxlcnQiXSwic291cmNlUm9vdCI6IiJ9
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicHJpbnQuYnVuZGxlLmpzIiwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7OztBQUF1QjtBQUVSLFNBQVNDLE9BQU8sR0FBRztFQUNoQ0MsS0FBSyxDQUFDLDZCQUE2QixDQUFDO0FBQ3RDIiwic291cmNlcyI6WyJ3ZWJwYWNrOi8vd2VicGFjay1idWlsZC8uL3NyYy9qcy9wcmludC5qcyJdLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgXyBmcm9tICdsb2Rhc2gnO1xuXG5leHBvcnQgZGVmYXVsdCBmdW5jdGlvbiBwcmludE1lKCkge1xuICBhbGVydCgnSSBnZXQgY2FsbGVkIGZyb20gcHJpbnQuanMhJyk7XG59Il0sIm5hbWVzIjpbIl8iLCJwcmludE1lIiwiYWxlcnQiXSwic291cmNlUm9vdCI6IiJ9

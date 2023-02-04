@@ -16,39 +16,52 @@ $color: orange
 // nesting
 // https://sass-lang.com/documentation/style-rules#nesting
 .main // .main
+  color: green
   .main--sidebar // .main .main--sidebar
+    color: red
 
 // selector lists
 // https://sass-lang.com/documentation/style-rules#selector-lists
 .alert, .warning // alert, warning
+  color: black
   ul, p // alert ul, warning ul, alert p, warning p
-
+    color: white
 // selector-combinators
 // https://sass-lang.com/documentation/style-rules#selector-combinators
-ul >
-  li // ul > li
+
 h2
   + p // h2 + p
+      color: blue
 p
   ~
     span // p ~ span
+      color: orange
 
 // & - parrent selector
 // https://sass-lang.com/documentation/style-rules/parent-selector
 .main // .main
+  width: 20px
   & // .main
+    width: 10px
   & &--sidebar // .main .main--sidebar
+    width: 15px
   &--sidebar:hover // .main--sidebar:hover
+    width: 25px
   body:not(&--sidebar) // all in body without main--sidebar
-
+    width: 7px
 // TODO ...
   
 // % | @extend - placeholder selectors
+
 %toolbelt
+  height: 20px
   &:hover // .action-buttons:hover, .reset-buttons:hover
+    height: 10px
 .action-buttons
+  color: green
   @extend %toolbelt // style + .action-buttons:hover
 .reset-buttons
+  color: gray
   @extend %toolbelt // style + .reset-buttons:hover
 
 // 

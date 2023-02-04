@@ -1,9 +1,10 @@
 const path = require('path');
 
 const Webpack = require('webpack');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 const toml = require('toml');
 const yaml = require('yamljs');
@@ -29,6 +30,8 @@ module.exports = {
   // https://webpack.js.org/guides/development/#using-webpack-dev-server
   devServer: {
     static: './dist',
+    port: 8080,
+    hot: true
   },
   optimization: {
     runtimeChunk: 'single',
@@ -36,6 +39,17 @@ module.exports = {
   // Setting up HtmlWebpackPlugin
   // https://webpack.js.org/guides/output-management/#setting-up-htmlwebpackplugin
   plugins: [
+    new Webpack.LoaderOptionsPlugin({
+      // test: /\.xxx$/, // may apply this only for some modules
+      options: {
+        // Config in .browserslistrc file
+        browserslist: [
+          'last 2 version',
+          'not dead',
+          'iOS >= 9'
+        ],
+      }
+    }),
     new LodashModuleReplacementPlugin({
       /* Create smaller Lodash builds by replacing feature sets of modules with noop, identity, or simpler alternatives.
       This plugin complements babel-plugin-lodash by shrinking its cherry-picked builds even further!
@@ -62,6 +76,9 @@ module.exports = {
     }),
     new HtmlWebpackPlugin({
       title: 'Development',
+    }),
+    new MiniCssExtractPlugin({
+      filename: '[name].css' // change this RELATIVE to your output.path!
     }),
     new BundleAnalyzerPlugin({
       /* Webpack plugin and CLI utility that represents bundle content as
@@ -97,42 +114,48 @@ module.exports = {
       {
         test: /\.m?js$/,
         exclude: /node_modules/,
-        use: ["babel-loader"],
+        use: ['babel-loader'],
       },
       {
         // Loading CSS
         // https://webpack.js.org/guides/asset-management/#loading-css
         test: /\.css$/i,
-        use: ['style-loader', 'css-loader'],
+        use: [
+          { loader: MiniCssExtractPlugin.loader },
+          { loader: 'css-loader', options: { sourceMap: true } },
+          { loader: 'postcss-loader', options: { sourceMap: true } },
+        ],
       },
       {
         test: /\.less$/i,
         use: [
-          // compiles Less to CSS
-          "style-loader",
-          "css-loader",
-          "less-loader",
+          { loader: MiniCssExtractPlugin.loader },
+          { loader: 'css-loader', options: { sourceMap: true } },
+          { loader: 'postcss-loader', options: { sourceMap: true } },
+          { loader: 'less-loader', options: { sourceMap: true } },
         ],
       },
       {
         test: /\.s[ac]ss$/i,
         use: [
-          // Creates `style` nodes from JS strings
-          "style-loader",
-          // Translates CSS into CommonJS
-          "css-loader",
-          // Compiles Sass to CSS
-          "sass-loader",
+          { loader: MiniCssExtractPlugin.loader },
+          { loader: 'css-loader', options: { sourceMap: true } },
+          { loader: 'postcss-loader', options: { sourceMap: true } },
+          { loader: 'sass-loader', options: { sourceMap: true } },
         ],
       },
       {
         test: /\.styl$/,
-        loader: "stylus-loader", 
-        // compiles Styl to CSS
+        use: [
+          { loader: MiniCssExtractPlugin.loader },
+          { loader: 'css-loader', options: { sourceMap: true } },
+          { loader: 'postcss-loader', options: { sourceMap: true } },
+          { loader: 'stylus-loader', options: { sourceMap: true } },
+        ],
       },
       {
         test: /\.html$/i,
-        loader: "html-loader",
+        loader: 'html-loader',
       },
       {
         // Loading Images
@@ -188,6 +211,6 @@ module.exports = {
     ],
   },
   resolve: {
-    extensions: ["*", ".js"],
+    extensions: ['*', '.js'],
   }
 };
