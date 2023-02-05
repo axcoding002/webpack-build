@@ -1,8 +1,9 @@
 {
   "name": "webpack-build",
+  "main": "server.js",
   "private": true,
   "version": "1.0.0",
-  "description": "",
+  "description": "my own webpack-build",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "webpackDev": "webpack --mode development --config webpack.config.js",
@@ -10,7 +11,8 @@
     "webpackWatch": "webpack --watch --mode development --config webpack.config.js",
     "webpackServe": "webpack serve --open --mode development --config webpack.config.js",
     "nodeServer": "node server.js",
-    "eslintSRCIndexJS": "eslint ./src/index.js"
+    "eslintSRCIndexJS": "eslint ./src/index.js",
+    "start": "node server.js"
   },
   "browserslist": [
     "cover 99.5%",
@@ -18,7 +20,7 @@
     "not dead"
   ],
   "author": "Alexandr Astashov <axcoding002@gmail.com>",
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
     "@babel/cli": "^7.20.7",
     "@babel/core": "^7.20.12",
@@ -93,6 +95,16 @@
     "@babel/runtime-corejs2": "^7.0.0",
     "@popperjs/core": "^2.11.6",
     "bootstrap": "^5.3.0-alpha1",
-    "lodash": "^4.17.21"
-  }
+    "lodash": "^4.17.21",
+    "mysql": "^2.18.1",
+    "mysql2": "^3.1.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/axcoding002/webpack-build.git"
+  },
+  "bugs": {
+    "url": "https://github.com/axcoding002/webpack-build/issues"
+  },
+  "homepage": "https://github.com/axcoding002/webpack-build#readme"
 }
