@@ -2,8 +2,12 @@ const path = require('path');
 
 const Webpack = require('webpack');
 const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const HtmlMinimizerPlugin = require('html-minimizer-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 const toml = require('toml');
@@ -14,29 +18,75 @@ module.exports = {
   mode: 'development',
   entry: {
     index: {
-      import: './src/index.js',
+      import: path.resolve(__dirname, 'src', 'index.js'),
       dependOn: 'shared',
     },
     print: {
-      import: './src/js/print.js',
+      import: path.resolve(__dirname, 'src', 'js','print.js'),
       dependOn: 'shared',
     },
     shared: 'lodash',
   },
-  // Using source maps
   // https://webpack.js.org/guides/development/#using-source-maps
+  //devtool: 'source-map',
   devtool: 'inline-source-map',
-  // Using webpack-dev-server
   // https://webpack.js.org/guides/development/#using-webpack-dev-server
   devServer: {
-    static: './dist',
+    // static: './dist',
+    historyApiFallback: true,
+    contentBase: path.resolve(__dirname, 'dist'),
+    open: true,
+    compress: true,
+    hot: true,
     port: 8080,
-    hot: true
   },
   optimization: {
     runtimeChunk: 'single',
+    minimize: true,
+    minimizer: [
+      new TerserPlugin({
+        terserOptions: {
+          ecma: undefined,
+          parse: {},
+          compress: {},
+          mangle: true, // Note `mangle.properties` is `false` by default.
+          module: false,
+          // Deprecated
+          output: null,
+          format: null,
+          toplevel: false,
+          nameCache: null,
+          ie8: false,
+          keep_classnames: undefined,
+          keep_fnames: false,
+          safari10: false,
+        },
+      }),
+      new CssMinimizerPlugin({
+        minimizerOptions: {
+          preset: [
+            'default',
+            {
+              discardComments: { removeAll: true },
+            },
+          ],
+        },
+      }),
+      new HtmlMinimizerPlugin({
+        minimizerOptions: {
+          caseSensitive: true, 
+          collapseWhitespace: true, 
+          conservativeCollapse: true, 
+          keepClosingSlash: true, 
+          minifyCSS: false, 
+          minifyJS: false, 
+          removeComments: true, 
+          removeScriptTypeAttributes: true, 
+          removeStyleLinkTypeAttributes: true,
+        },
+      }),
+    ],
   },
-  // Setting up HtmlWebpackPlugin
   // https://webpack.js.org/guides/output-management/#setting-up-htmlwebpackplugin
   plugins: [
     new Webpack.LoaderOptionsPlugin({
@@ -44,12 +94,11 @@ module.exports = {
       options: {
         // Config in .browserslistrc file
         browserslist: [
-          'last 2 version',
-          'not dead',
-          'iOS >= 9'
-        ],
+          '> 0.25%, not dead'
+        ]
       }
     }),
+    new Webpack.HotModuleReplacementPlugin(),
     new LodashModuleReplacementPlugin({
       /* Create smaller Lodash builds by replacing feature sets of modules with noop, identity, or simpler alternatives.
       This plugin complements babel-plugin-lodash by shrinking its cherry-picked builds even further!
@@ -75,11 +124,19 @@ module.exports = {
       placeholders: false, // Argument placeholder support for “bind”, “curry”, & “partial” methods. (requires currying)
     }),
     new HtmlWebpackPlugin({
-      title: 'Development',
+      // Type \ Default \ Description
+      title: 'webpack-build', // type: String; default: 'Webpack App';  The title to use for the generated HTML document.
+      template: path.resolve(__dirname, 'src', 'html', 'index.html'), // String||Function; The file to write the HTML to. Defaults to index.html. You can specify a subdirectory here too (eg: assets/admin.html). The [name] placeholder will be replaced with the entry name. Can also be a function e.g. (entryName) => entryName + '.html'.
+      filename: 'index.html',
+      //
+      //chunksSortMode: auto, // {String|Function} / auto / Allows to control how chunks should be sorted before they are included to the HTML. Allowed values are 'none' | 'auto' | 'manual' | {Function}
+      //excludeChunks: // {Array.<string>} / `` / Allows you to skip some chunks (e.g don't add the unit-test chunk).
+      //xhtml: false, // Boolean / false / If true render the link tags as self-closing (XHTML compliant).
     }),
     new MiniCssExtractPlugin({
       filename: '[name].css' // change this RELATIVE to your output.path!
     }),
+    //new postcssPresetEnv({}),
     new BundleAnalyzerPlugin({
       /* Webpack plugin and CLI utility that represents bundle content as
       convenient interactive zoomable treemap */
@@ -99,22 +156,17 @@ module.exports = {
       logLevel: */
     }),
   ],
-  output: {
-    filename: '[name].bundle.js',
-    path: path.resolve(__dirname, 'dist'),
-    // Cleaning up the /dist folder
-    // https://webpack.js.org/guides/output-management/#cleaning-up-the-dist-folder
-    clean: true,
-    // Using webpack-dev-middleware
-    // https://webpack.js.org/guides/development/#using-webpack-dev-middleware
-    publicPath: '/',
-  },
   module: {
     rules: [
       {
         test: /\.m?js$/,
         exclude: /node_modules/,
-        use: ['babel-loader'],
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: ['@babel/preset-env']
+          }
+        }
       },
       {
         // Loading CSS

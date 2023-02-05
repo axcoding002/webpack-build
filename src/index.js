@@ -1,11 +1,10 @@
-import _ from 'lodash';
-import printMe from './js/print.js';
-import Icon from './image/favicon.ico';
+import _ from 'lodash'
+import printMe from './js/print.js'
+import Icon from './image/favicon.ico'
 // import './style/example.css';
 // import './style/example.less';
 // import './style/example.scss';
-import './style/example.sass';
-
+import './style/example.sass'
 /*
 import blockHTML from './html/block.html';
 alert(blockHTML);
@@ -34,20 +33,15 @@ alert(json.owner.name); // output `Tom Preston-Werner`
 */
 
 function component() {
-  const element = document.createElement('div');
+  const element = document.createElement('div')
   // Lodash, now imported by this script
-  element.innerHTML = _.join(['Hello', 'webpack'], ' ');
-  element.classList.add('hello');
-  
+  element.innerHTML = _.join(['Hello', 'webpack'], ' ')
+  element.classList.add('hello')
   // Add the image to our existing div.
-  const myIcon = new Image();
-  myIcon.src = Icon;
-  
-  myIcon.onclick = printMe;
-
-  element.appendChild(myIcon);
-
-  return element;
+  const myIcon = new Image()
+  myIcon.src = Icon
+  myIcon.onclick = printMe
+  element.appendChild(myIcon)
+  return element
 }
-
-document.body.appendChild(component());
+document.body.appendChild(component())
